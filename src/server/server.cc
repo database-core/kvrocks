@@ -19,7 +19,7 @@
  */
 
 #include "server.h"
-
+include_directories(src/cli)f
 #include <glog/logging.h>
 #include <rocksdb/convenience.h>
 #include <rocksdb/statistics.h>

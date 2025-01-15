@@ -348,10 +348,11 @@ Status Connection::ExecuteCommand(engine::Context &ctx, const std::string &cmd_n
                                   const std::vector<std::string> &cmd_tokens, Commander *current_cmd,
                                   std::string *reply) {
   srv_->stats.IncrCalls(cmd_name);
-
   auto start = std::chrono::high_resolution_clock::now();
   bool is_profiling = IsProfilingEnabled(cmd_name);
+
   auto s = current_cmd->Execute(ctx, srv_, this, reply);
+
   auto end = std::chrono::high_resolution_clock::now();
   uint64_t duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
   if (is_profiling) RecordProfilingSampleIfNeed(cmd_name, duration);

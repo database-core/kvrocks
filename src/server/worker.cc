@@ -200,6 +200,8 @@ void Worker::newUnixSocketConnection(evconnlistener *listener, evutil_socket_t f
       BEV_OPT_THREADSAFE | BEV_OPT_DEFER_CALLBACKS | BEV_OPT_UNLOCK_CALLBACKS | BEV_OPT_CLOSE_ON_FREE;
   bufferevent *bev = bufferevent_socket_new(base, fd, ev_thread_safe_flags);
 
+  // event loop call back
+  // 不是epoll
   auto conn = new redis::Connection(bev, this);
   conn->SetCB(bev);
   bufferevent_enable(bev, EV_READ);

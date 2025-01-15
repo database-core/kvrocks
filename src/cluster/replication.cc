@@ -594,6 +594,7 @@ ReplicationThread::CBState ReplicationThread::incrementBatchLoopCB(bufferevent *
           return CBState::AGAIN;
         }
 
+        // get write batch data | from wal?
         rocksdb::WriteBatch batch(std::move(bulk_string));
 
         auto s = storage_->ReplicaApplyWriteBatch(&batch);
